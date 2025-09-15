@@ -1,2 +1,4 @@
-# web-development-labs
-repository for labs on web technologies and web design
+## Лабораторні роботи з дисципліни "Вебтехнології та вебдизайн"
+
+## Виконала: Рудницька Ірина Іванівна (ІР-24)
+## Лабораторна робота №1 (Варіант 9)
