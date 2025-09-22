@@ -16,12 +16,16 @@ li {
 button {
     border: 0;
 }
-.button__request-demo {
+._request-demo {
     position: absolute;
     right: 150px;
     width: 210px;
     height: 60px;
-    background: linear-gradient(180deg, #F6FAFD 0%, #FFFFFF 19.4%);
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     
     background: #fff;
     border-color: #fff;
@@ -37,13 +41,19 @@ button {
 
 }
 
-.button__learn-more1 {
+._learn-more1 {
+    font-family: 'Avenir';
+    font-weight: 900;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 160%;
+    color: #fff;
+    background-color: rgba(156, 105, 226, 1);
     width: 170px;
     height: 60px;
-    background-color: rgba(156, 105, 226, 1);
     border-radius: 50px;
-    color: #fff;
-    border-color: #fff;
 
 }
 

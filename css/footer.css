@@ -17,6 +17,9 @@
     font-family: 'Avenir';
     font-weight: 900;
     font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     line-height: 160%;
     color: #fff;
     background-color: rgba(240, 99, 184, 1);
@@ -27,9 +30,13 @@
 }
 
 
-.button__request-demo2 {
+._request-demo2 {
     width: 210px;
     height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     background: linear-gradient(180deg, #F6FAFD 0%, #FFFFFF 19.4%);
     background: #fff;
     border-color: #fff;
@@ -60,6 +67,15 @@
 
 
 }
+
+.message {
+  position: fixed;
+  bottom: 20px; 
+  right: 80px;
+  padding: 12px;
+  cursor: pointer;
+}
+
 
 .footer-line {
     width: 100%;
