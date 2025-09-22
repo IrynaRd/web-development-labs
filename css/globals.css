@@ -1,8 +1,25 @@
+:root {
+  --font-size-md: 1rem;
+  --font-size-sm: 0.875rem;
+  --font-size-xs: 0.75rem;
+}
+
 body {
     font-family: "Avenir", sans-serif;
     color: #9C69E2;
 }
 
+@media screen and (max-width: 1024px){
+    body {
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 1024px){
+    :root {
+        font-size: 12 px;
+    }
+}
 
 
 a {
@@ -16,46 +33,18 @@ li {
 button {
     border: 0;
 }
-._request-demo {
-    position: absolute;
-    right: 150px;
-    width: 210px;
-    height: 60px;
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    
-    background: #fff;
-    border-color: #fff;
-    box-shadow: 0px 5px 5px rgba(75, 93, 104, 0.1);
-    border-radius: 50px;
-    font-weight: 800;
-    font-size: 16px;
-    line-height: 160%;
-    letter-spacing: 0.005em;
-    color: rgba(33, 35, 83, 1);
 
-    
-
+.global__container {
+    margin: 0 auto;
+    max-width: 1117px;
 }
 
-._learn-more1 {
-    font-family: 'Avenir';
-    font-weight: 900;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 160%;
-    color: #fff;
-    background-color: rgba(156, 105, 226, 1);
-    width: 170px;
-    height: 60px;
-    border-radius: 50px;
-
+@media screen and (max-width: 1024px){
+    .global__container {
+        padding: 0 40px;
+    }
 }
+
 
 .container {
     margin: 0 auto;
@@ -64,6 +53,12 @@ button {
     font-size: 18px;
     
     
+}
+
+@media screen and (max-width: 1024px){
+    .container {
+        padding: 0 40px;
+    }
 }
 
 .title {
@@ -76,11 +71,26 @@ button {
 }
 
 .paragraph {
-    width: 380px;
+    width: 100%;
+    max-width: 380px;
+    
     margin-top: 40px;
     margin-bottom: 60px;
     font-weight: 500;
     font-size: 18px;
     line-height: 160%;
     color: #4B5D68;
+}
+
+
+@media screen and (min-width: 1260px){
+    .container {
+        max-width: 1117px;
+    }
+}
+
+@media screen and (min-width: 1260px){
+    .global__container {
+        max-width: 1217px;
+    }
 }

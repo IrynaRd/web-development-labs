@@ -1,6 +1,7 @@
 .footer-container {
     display: flex;
     justify-content: space-between;
+    width: 100%;
     max-width: 1117px;
     align-items: center;
     margin: 0 auto;
@@ -23,7 +24,7 @@
     line-height: 160%;
     color: #fff;
     background-color: rgba(240, 99, 184, 1);
-    width: 170px;
+    width: 210px;
     height: 60px;
     border-radius: 50px;
 
@@ -31,7 +32,8 @@
 
 
 ._request-demo2 {
-    width: 210px;
+    width: 100%;
+    max-width: 210px;
     height: 60px;
     display: flex;
     align-items: center;
@@ -69,11 +71,13 @@
 }
 
 .message {
-  position: fixed;
-  bottom: 20px; 
-  right: 80px;
-  padding: 12px;
-  cursor: pointer;
+    position: fixed;
+    bottom: 20px;
+    right: 80px;
+    padding: 12px;
+    cursor: pointer;
+    animation: floating 3s linear infinite;
+
 }
 
 
@@ -83,4 +87,19 @@
     background: rgba(156, 105, 226, 0.2);
     margin-bottom: 40px;
 }
+
+
+@media screen and (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+    }
+
+    .footer-btns {
+        flex-direction: column;
+        margin-right: 0;
+        margin-bottom: 24px;
+    }
+
+}
+
 
