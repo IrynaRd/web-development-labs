@@ -8,7 +8,7 @@
 
 @media screen and (max-width: 1024px){
     .features-container {
-        padding: 0 40px;
+        padding: 0 10px;
     }
 }
 
@@ -173,6 +173,11 @@
 
     .features-inner {
         align-items: center;
+        background-color: antiquewhite;
+        border-radius: 10%;
+        padding: 20px;
+        margin-top: 30px;
+        margin-left: 2px;
     }
 }
 

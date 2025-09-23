@@ -107,6 +107,7 @@
         margin-top: 0;
         clip-path: circle(0 at top left);
         transition: clip-path 0.9s ease-in;
+        overflow: auto;
     }
 
     .header_nav.open {

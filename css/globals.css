@@ -41,7 +41,7 @@ button {
 
 @media screen and (max-width: 1024px){
     .global__container {
-        padding: 0 40px;
+        padding: 0 10px;
     }
 }
 
@@ -57,7 +57,7 @@ button {
 
 @media screen and (max-width: 1024px){
     .container {
-        padding: 0 40px;
+        padding: 0 1px;
     }
 }
 

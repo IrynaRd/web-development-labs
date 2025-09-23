@@ -33,7 +33,7 @@
     .pink-container {
         flex-direction: column;
         height: auto;
-        padding: 20px;
+        padding: 0px;
         background: none;
     }
 
