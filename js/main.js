@@ -8,6 +8,8 @@ const countButton = document.getElementById("count");
 const bookList = document.getElementById("bookList");
 const totalExpences = document.getElementById("total_expences");
 
+let currentBooks = [...data];
+
 const itemTemplate = ({ id, title, author, price, pages, description }) => `
 <li id="${id}" class="card mb-3 item-card" draggable="true">
     <img
@@ -28,6 +30,7 @@ const itemTemplate = ({ id, title, author, price, pages, description }) => `
 </li>`;
 
 function renderBooks(array) {
+    currentBooks = array;
     bookList.innerHTML = "";
     array.forEach(book => {
         bookList.insertAdjacentHTML("beforeend", itemTemplate(book));
@@ -35,6 +38,7 @@ function renderBooks(array) {
         const removeBtn = bookElement.querySelector(".remove-btn");
         removeBtn.addEventListener("click", () => {
             bookElement.remove();
+            currentBooks = currentBooks.filter(b => b.id !== book.id);
         });
     });
 }
@@ -42,9 +46,11 @@ function renderBooks(array) {
 renderBooks(data);
 
 searchButton.addEventListener("click", () => {
-    const foundBooks = data.filter(
-        (book) => book.title.toLowerCase() === searchInput.value.toLowerCase()
+    const query = searchInput.value.toLowerCase().trim();
+    const foundBooks = data.filter((book) =>
+        book.title.toLowerCase().includes(query)
     );
+
     renderBooks(foundBooks);
 });
 
@@ -53,13 +59,20 @@ reset_searchButton.addEventListener("click", () => {
     searchInput.value = "";
 });
 
-sortButton.addEventListener("click", () => {
-    data.sort((a, b) => a.price - b.price);
-    renderBooks(data);
+sortButton.addEventListener("change", () => {
+    const choice = sortButton.value;
+
+    if (choice === "price") {
+        currentBooks.sort((a, b) => a.price - b.price);
+    } else if (choice === "pages") {
+        currentBooks.sort((a, b) => a.pages - b.pages);
+    }
+
+    renderBooks(currentBooks);
 });
 
 countButton.addEventListener("click", () => {
-    const total_price = data.reduce((sum, book) =>
+    const total_price = currentBooks.reduce((sum, book) => 
         sum + book.price, 0);
     totalExpences.textContent = total_price;
     

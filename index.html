@@ -24,12 +24,12 @@
         <div class="container-fluid">
 
             <a class="navbar-brand fw-bold" href="#">My Library</a>
-    
+
             <div class="d-flex">
                 <button id="books_page" class="btn btn-outline-primary me-2">Books</button>
                 <button id="create" class="btn btn-outline-success">Create Book</button>
             </div>
-    
+
             <div class="search__menu d-flex ms-auto">
                 <input type="text" id="searchInput" class="form-control me-2" placeholder="Type something...">
                 <button id="search" class="btn btn-primary me-2">Search</button>
@@ -43,10 +43,11 @@
             <aside class="col-3 border-end pe-4">
                 <h5 class="fw-bold mb-3">Manage books</h5>
 
-                <div class="mb-3">
-                    <label class="form-label">Sort by price:</label><br>
-                    <button id="sort" class="btn btn-outline-secondary w-100">Sort</button>
-                </div>
+                <select id="sort" class="form-select w-auto">
+                    <option value="">Sort for:</option>
+                    <option value="price">price</option>
+                    <option value="pages">pages</option>
+                </select>
 
                 <div class="mb-3">
                     <strong>Total price:</strong> <span id="total_expences">0</span>$<br>
