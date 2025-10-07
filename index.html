@@ -40,7 +40,7 @@
 
     <div class="container-fluid mt-3">
         <div class="row">
-            <aside class="col-3 border-end pe-4">
+            <aside id="manageBooks" class="col-3 border-end pe-4">
                 <h5 class="fw-bold mb-3">Manage books</h5>
 
                 <select id="sort" class="form-select w-auto">
@@ -56,11 +56,51 @@
                 </div>
             </aside>
 
+            <section id="formSection" class="container mt-4">
+                <h2 id="formTitle" class="text-center mb-4">Create Book</h2>
+
+                <div class="form__container">
+
+                    <form id="add_form" class="bg-light">
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="title_input" placeholder="Text..." />
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Author</label>
+                            <input type="text" class="form-control" id="author_input" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Price($)</label>
+                            <input type="number" id="price_input" class="form-control" step="10.0" min="0" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Pages</label>
+                            <input type="number" class="form-control" id="pages_input" step="1.0" min="0" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Description</label>
+                            <input type="text" class="form-control" id="description_input" placeholder="Text..." />
+                        </div>
+                        <button id="submit_button" type="submit" class="btn btn-primary">
+                            Submit
+                        </button>
+                    </form>
+                </div>
+            </section>
+
             <main class="col-9">
                 <div id="bookList" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
 
                 </div>
             </main>
+        </div>
+    </div>
+
+    <div id="modal" class="modal" style="display:none;">
+        <div class="modal__content">
+            <span id="close_modal" class="close">&times;</span>
+            <p id="modal_message"></p>
         </div>
     </div>
 

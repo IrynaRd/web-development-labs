@@ -1,0 +1,10 @@
+.container {
+    display: none;
+}
+
+.form__container {
+    display: block;
+    max-width: 350px;
+    margin: 0 auto;
+    margin-bottom: 100px;
+}
