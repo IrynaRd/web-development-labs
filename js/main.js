@@ -1,5 +1,5 @@
-import { data } from "./data.js";
 import { getInputValues, clearInputs } from "./dom_util.js";
+import {getAllBooks, postBook, updateBook, deleteBook} from "./api.js";
 
 const searchButton = document.getElementById("search");
 const searchInput = document.getElementById("searchInput");
@@ -30,7 +30,8 @@ closeModal.addEventListener("click", () => {
     modal.style.display = "none";
 });
 
-let currentBooks = [...data];
+let currentBooks = [];
+let bookIdToEdit = null;
 
 const itemTemplate = ({ id, title, author, price, pages, description }) => `
 <li id="${id}" class="card mb-3 item-card" draggable="true">
@@ -50,22 +51,6 @@ const itemTemplate = ({ id, title, author, price, pages, description }) => `
         </div>
     </div>
 </li>`;
-
-const addItem = ({ description, title, author, price, pages }) => {
-    const generetedId = uuid.v1();
-
-    const newItem = {
-        id: generetedId,
-        title,
-        author,
-        price: Number(price),
-        pages: Number(pages),
-        description,
-    };
-
-    currentBooks.push(newItem);
-    addItemToPage(newItem);
-}
 
 
 
@@ -97,22 +82,30 @@ function renderBooks(array) {
         bookList.insertAdjacentHTML("beforeend", itemTemplate(book));
         const bookElement = bookList.lastElementChild;
         const removeBtn = bookElement.querySelector(".remove-btn");
-        removeBtn.addEventListener("click", () => {
-            bookElement.remove();
-            currentBooks = currentBooks.filter(b => b.id !== book.id);
+
+        removeBtn.addEventListener("click", async () => {
+            try {
+                await deleteBook(book.id); 
+                await refetchAllBooks(); 
+                
+                showModal("deleted");
+            } catch (error) {
+                showModal("delete error");
+            }
         });
+
         const editButton = bookElement.querySelector(".edit-btn");
         editButton.addEventListener("click", onEditItem);
     });
 }
 
-renderBooks(data);
 
 function onEditItem(event) {
     const editButton = event.target;
     const bookElement = editButton.closest("li");
     const book_id = bookElement.id;
     const book = currentBooks.find(b => String(b.id) === String(book_id));
+    bookIdToEdit = book.id;
 
     bookList.style.display = "none";
     manageSection.style.display = "none";
@@ -129,7 +122,7 @@ function onEditItem(event) {
 
 searchButton.addEventListener("click", () => {
     const query = searchInput.value.toLowerCase().trim();
-    const foundBooks = data.filter((book) =>
+    const foundBooks = currentBooks.filter((book) =>
         book.title.toLowerCase().includes(query)
     );
 
@@ -137,7 +130,7 @@ searchButton.addEventListener("click", () => {
 });
 
 reset_searchButton.addEventListener("click", () => {
-    renderBooks(data);
+    refetchAllBooks();
     searchInput.value = "";
 });
 
@@ -155,8 +148,11 @@ sortButton.addEventListener("change", () => {
 
 countButton.addEventListener("click", () => {
     const total_price = currentBooks.reduce((sum, book) =>
-        sum + book.price, 0);
-    totalExpences.textContent = total_price;
+        sum + parseFloat(book.price), 0);
+    
+    const formatted_price = total_price.toFixed(2);
+    
+    totalExpences.textContent = formatted_price;
 
 });
 
@@ -172,21 +168,60 @@ booksPageButton.addEventListener("click", () => {
     formSection.style.display = "none";
 })
 
-submitButton.addEventListener("click", (event) => {
+
+const refetchAllBooks = async() => {
+    const allBooks = await getAllBooks();
+
+    currentBooks = allBooks;
+
+    renderBooks(currentBooks);
+}
+
+submitButton.addEventListener("click", async (event) => {
     event.preventDefault();
-    const { title, author, price, pages, description } = getInputValues();
+    const inputValues = getInputValues(); 
+    const { title, author, price, pages, description } = inputValues;
+
 
     if (!title.trim() || !author.trim() || !price.trim() || !pages.trim() || !description.trim()) {
         showModal("Enter data in all inputs!");
         return;
     }
-    addItem({ description, title, author, price, pages });
-    renderBooks(currentBooks);
-    bookList.style.display = "flex";
-    manageSection.style.display = "block";
-    formSection.style.display = "none";
 
-    clearInputs();
+    const bookData = {
+        description, 
+        title, 
+        author, 
+        price: Number(price), 
+        pages: Number(pages)
+    };
+
+    try {
+        if (bookIdToEdit) {
+            await updateBook(bookIdToEdit, bookData);
+            bookIdToEdit = null;
+            document.getElementById("formTitle").textContent = "Create New Book";
+            submitButton.textContent = "Submit";
+
+        } else {
+            await postBook(bookData); 
+        }
+
+        await refetchAllBooks(); 
+        
+        clearInputs();
+        
+        bookList.style.display = "flex";
+        manageSection.style.display = "block";
+        formSection.style.display = "none";
+        
+    } catch (error) {
+        const errorMessage = bookIdToEdit ? "Error" : "Error";
+        showModal(errorMessage);
+        console.error(error);
+    }
+
 
 });
 
+refetchAllBooks();
