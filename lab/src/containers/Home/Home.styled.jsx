@@ -52,6 +52,7 @@ export const StyledButton = styled(Button)`
 export const CardWrapper = styled.div`
     display: flex;
     justify-content: space-around;
+    gap: 10px;
     width: 100%;
     margin-top: 40px;
 `

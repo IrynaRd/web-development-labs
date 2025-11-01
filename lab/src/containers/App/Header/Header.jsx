@@ -1,5 +1,5 @@
 import react from "react";
-import { StyledHeader, IconsWrapper } from "./Layout.styles";
+import { StyledHeader, IconsWrapper } from "./Header.styled";
 import {
     BookOutlined,
     TwitterOutlined,
@@ -9,7 +9,7 @@ import {
     ShoppingCartOutlined,
 } from "@ant-design/icons";
 
-const Layout = () => (
+const Header = () => (
     <StyledHeader title="Book Shop">
         <div>
             <IconsWrapper>
@@ -36,4 +36,4 @@ const Layout = () => (
     </StyledHeader>
 );
 
-export default Layout;
+export default Header;

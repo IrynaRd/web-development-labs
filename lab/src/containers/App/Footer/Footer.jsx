@@ -8,7 +8,7 @@ import {
     TextBlock,
     TopRow,
     HorizontalLine,
-} from "./Footer.styles";
+} from "./Footer.styled";
 
 import {
     TwitterOutlined,

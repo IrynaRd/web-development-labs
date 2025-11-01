@@ -1,8 +1,8 @@
-import React from "react";
-import { Card, Button } from "antd";
-import { Footer } from "./CardItem.styles";
+import React from "react"
+import { Card, Button } from "antd"
+import { Footer } from "./CardItem.styled"
 
-const { Meta } = Card;
+const { Meta } = Card
 
 const CardItem = ({ title = 'no title', author, text, imageSrc, price }) => (
     <Card
@@ -26,4 +26,4 @@ const CardItem = ({ title = 'no title', author, text, imageSrc, price }) => (
     </Card>
 );
 
-export default CardItem;
+export default CardItem
