@@ -7,8 +7,10 @@ export const Wrapper = styled.footer`
     align-items: center;
     background-color: #ffffffff;
     color: white;
-    padding: 30px 100px;
+    padding: 30px 10px;
     gap: 20px;
+    max-width: 1150px;
+    margin: 0 auto;
 `;
 
 export const TopRow = styled.div`

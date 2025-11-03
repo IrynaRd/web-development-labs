@@ -6,7 +6,6 @@ import { SectionWrapper, StyledText, StyledButton, CardWrapper, MainImage } from
 import CardItem from "../CardItem/CardItem";
 
 import MainPicture from "../../assets/icons/books.png";
-import CardPicture from "../../assets/icons/images.jpg";
 import {data} from "../../assets/data/data";
 
 const Home = () => {

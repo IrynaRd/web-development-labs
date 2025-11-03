@@ -1,16 +1,21 @@
 import React from "react"
 import CardItem from "../CardItem/CardItem";
-import CardPicture from "../../assets/icons/images.jpg";
-import { data } from "../../assets/data/data";
-import { CardWrapper } from "../Catalog/Catalog.styled";
+import { data, GenreOptions, OriginOptions, SortOptions } from "../../assets/data/data";
+import { CardWrapper, HeadWrapper, FilterWrapper } from "../Catalog/Catalog.styled";
 import Filter from "./Select/Select";
+import { Button } from './Catalog.styled';
 
 const Catalog = () => {
     return (
         <div>
-            <Filter/>
-
-
+            <HeadWrapper>
+                <FilterWrapper>
+                    <Filter placeholder = {"Genre"} options = {GenreOptions}/>
+                    <Filter placeholder = {"Origin"} options = {OriginOptions}/>
+                    <Filter placeholder = {"Sort by"} options = {SortOptions}/>
+                </FilterWrapper>
+                <Button >Apply</Button>
+            </HeadWrapper>
 
             <CardWrapper>
                 {data.map(({ title, author, text, image, price }, index) => (

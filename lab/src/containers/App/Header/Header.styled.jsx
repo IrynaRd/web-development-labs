@@ -3,12 +3,14 @@ import styled from 'styled-components';
 export const StyledHeader = styled.div`
     padding: 0px 0px 0px;
     display: flex;
-    justify-content: space-around;
-    margin-top: 10px;
-    margin-right: 50px;
-    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 1150px;
+    align-items: center;
+    margin: 0 auto;
     table-layout: fixed;
     border-spacing: 10px;
+    
     > div {
         display: flex;
     }
