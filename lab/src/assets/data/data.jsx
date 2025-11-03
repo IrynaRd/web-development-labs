@@ -6,6 +6,7 @@ export const data = [
         text: "Fantasy novel about a wizard boy 1",
         image: CardPicture,
         price: 1000,
+        id: 1
     },
     
     {
@@ -14,6 +15,7 @@ export const data = [
         text: "Fantasy novel about a wizard boy 2",
         image: CardPicture,
         price: 800,
+        id:2
     },
     {
         title: "Harry Potter 3",
@@ -21,6 +23,7 @@ export const data = [
         text: "Fantasy novel about a wizard boy 3",
         image: CardPicture,
         price: 700,
+        id:3
     },
     {
         title: "Harry Potter 4",
@@ -28,6 +31,7 @@ export const data = [
         text: "Fantasy novel about a wizard boy 4",
         image: CardPicture,
         price: 600,
+        id:4
     },
     
     {
@@ -36,6 +40,7 @@ export const data = [
         text: "Fantasy novel about a wizard boy 5",
         image: CardPicture,
         price: 500,
+        id:5
     },
     {
         title: "Harry Potter 6",
@@ -43,6 +48,7 @@ export const data = [
         text: "Fantasy novel about a wizard boy 6",
         image: CardPicture,
         price: 400,
+        id:6
     }
 ];
 

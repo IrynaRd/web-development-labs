@@ -10,13 +10,13 @@ const Navigation = () => (
         <LinkingWrapper>
             <ul>
                 <li>
-                    <NavLink exact to="/" activeClassName="selected">Home</NavLink>
+                    <NavLink to="/" end className={({ isActive }) => isActive ? 'selected' : undefined}>Home</NavLink>
                 </li>
                 <li>
-                    <NavLink exact to="/catalog" activeClassName="selected">Catalog</NavLink>
+                    <NavLink to="/catalog" end className={({ isActive }) => isActive ? 'selected' : undefined}>Catalog</NavLink>
                 </li>
                 <li>
-                    <NavLink exact to="/cart" activeClassName="selected">Cart</NavLink>
+                    <NavLink to="/cart" end className={({ isActive }) => isActive ? 'selected' : undefined}>Cart</NavLink>
                 </li>
             </ul>
 

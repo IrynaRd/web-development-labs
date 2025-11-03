@@ -27,14 +27,15 @@ const Home = () => {
             <CardWrapper>
                 {data
                     .slice(0, 3)
-                    .map(({ title, author, text, image, price }, index) => (
+                    .map(({ title, author, text, image, price, id }) => (
                         <CardItem
+                            key={id}
                             title={title}
                             author = {author}
                             text={text}
                             imageSrc={image}
                             price={price}
-                            id={index}
+                            
                         />
                 ))}
             </CardWrapper>

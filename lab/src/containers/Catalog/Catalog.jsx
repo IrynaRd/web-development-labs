@@ -18,14 +18,14 @@ const Catalog = () => {
             </HeadWrapper>
 
             <CardWrapper>
-                {data.map(({ title, author, text, image, price }, index) => (
+                {data.map(({ title, author, text, image, price, id }) => (
                     <CardItem
+                        key={id}
                         title={title}
                         author={author}
                         text={text}
                         imageSrc={image}
                         price={price}
-                        id={index}
                     />
                 )
 
