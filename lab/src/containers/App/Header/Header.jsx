@@ -5,7 +5,6 @@ import {
     TwitterOutlined,
     InstagramOutlined,
     FacebookOutlined,
-    SearchOutlined,
     ShoppingCartOutlined,
 } from "@ant-design/icons";
 
@@ -28,8 +27,6 @@ const Header = () => (
         </div>
         <div>
             <IconsWrapper>
-                <SearchOutlined />
-
                 <ShoppingCartOutlined />
             </IconsWrapper>
         </div>

@@ -1,12 +1,26 @@
 import CardPicture from "../icons/images.jpg";
-export const data = [
+export const books = [
+    {
+        title: "Planet of the Wormhood",
+        author: "O.S. Zabuzhko",
+        text: "Lorem ipsum",
+        image: CardPicture,
+        price: 2000,
+        id:7,
+        genre: "non-fiction",
+        origin: "ukrainian",
+        cover: "hardcover"
+    },
     {
         title: "Harry Potter",
         author: "J.K. Rowling",
         text: "Fantasy novel about a wizard boy 1",
         image: CardPicture,
         price: 1000,
-        id: 1
+        id: 1,
+        genre: "fiction",
+        origin: "foreign",
+        cover: "softcover"
     },
     
     {
@@ -15,7 +29,10 @@ export const data = [
         text: "Fantasy novel about a wizard boy 2",
         image: CardPicture,
         price: 800,
-        id:2
+        id:2,
+        genre: "fiction",
+        origin: "foreign",
+        cover: "hardcover"
     },
     {
         title: "Harry Potter 3",
@@ -23,7 +40,10 @@ export const data = [
         text: "Fantasy novel about a wizard boy 3",
         image: CardPicture,
         price: 700,
-        id:3
+        id:3,
+        genre: "fiction",
+        origin: "foreign",
+        cover: "softcover"
     },
     {
         title: "Harry Potter 4",
@@ -31,7 +51,10 @@ export const data = [
         text: "Fantasy novel about a wizard boy 4",
         image: CardPicture,
         price: 600,
-        id:4
+        id:4,
+        genre: "fiction",
+        origin: "foreign",
+        cover: "softcover"
     },
     
     {
@@ -40,7 +63,10 @@ export const data = [
         text: "Fantasy novel about a wizard boy 5",
         image: CardPicture,
         price: 500,
-        id:5
+        id:5,
+        genre: "fiction",
+        origin: "foreign",
+        cover: "softcover"
     },
     {
         title: "Harry Potter 6",
@@ -48,7 +74,10 @@ export const data = [
         text: "Fantasy novel about a wizard boy 6",
         image: CardPicture,
         price: 400,
-        id:6
+        id:6,
+        genre: "fiction",
+        origin: "foreign",
+        cover: "hardcover"
     }
 ];
 
@@ -74,14 +103,14 @@ export const OriginOptions = [
     }
 ];
 
-export const SortOptions = [
+export const CoverOptions = [
     {
-        value: 'price',
-        lable: <span>by price</span>
+        value: 'softcover',
+        lable: <span>softcover</span>
     },
     {
-        value: 'pages',
-        lable: <span>by pages</span>
+        value: 'hardcover',
+        lable: <span>hardcover</span>
     }
 ];
 

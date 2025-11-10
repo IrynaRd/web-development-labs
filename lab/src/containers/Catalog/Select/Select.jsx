@@ -1,11 +1,11 @@
 import React from "react"
 import { Select } from "antd"
 
-const Filter = ({placeholder, options}) => (
+const Filter = ({placeholder, options, onChange}) => (
     <Select
         placeholder = {placeholder}
-        // allowClear
-        // onChange={onChange}
+        allowClear
+        onChange={onChange}
         options ={options}
     />
 

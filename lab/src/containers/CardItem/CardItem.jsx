@@ -4,7 +4,7 @@ import { Footer } from "./CardItem.styled"
 
 const { Meta } = Card
 
-const CardItem = ({ title = 'no title', author, text, imageSrc, price }) => (
+const CardItem = ({ title = 'no title', author, text, imageSrc, price, onShowMore }) => (
     <Card
         hoverable
         style={{ width: 350, borderRadius: "20px" }}
@@ -21,7 +21,7 @@ const CardItem = ({ title = 'no title', author, text, imageSrc, price }) => (
         } />
         <Footer>
             <p>${price}</p>
-            <Button>Show More</Button>
+            <Button onClick={onShowMore}>Show More</Button>
         </Footer>
     </Card>
 );
