@@ -24,6 +24,7 @@ const Navigation = () => (
                 <Route path="/catalog" element={<Catalog />} />
                 <Route path="/cart" element={<div>cart</div>} />
                 <Route path="/" element={<Home />} />
+                <Route path="*" element={<div>Not found</div>} />
             </Routes>
         </LinkingWrapper>
     </Router>

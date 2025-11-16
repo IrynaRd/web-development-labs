@@ -1,7 +1,7 @@
 import CardPicture from "../icons/images.jpg";
 export const books = [
     {
-        title: "Planet of the Wormhood",
+        title: "Planet of Wormhood",
         author: "O.S. Zabuzhko",
         text: "Lorem ipsum",
         image: CardPicture,
@@ -75,6 +75,28 @@ export const books = [
         image: CardPicture,
         price: 400,
         id:6,
+        genre: "fiction",
+        origin: "foreign",
+        cover: "hardcover"
+    },
+    {
+        title: "Harry Potter 7(1)",
+        author: "J.K. Rowling",
+        text: "Fantasy novel about a wizard boy 7(1)",
+        image: CardPicture,
+        price: 400,
+        id:8,
+        genre: "fiction",
+        origin: "foreign",
+        cover: "hardcover"
+    },
+    {
+        title: "Harry Potter 7(2)",
+        author: "J.K. Rowling",
+        text: "Fantasy novel about a wizard boy 7(2)",
+        image: CardPicture,
+        price: 400,
+        id:9,
         genre: "fiction",
         origin: "foreign",
         cover: "hardcover"
