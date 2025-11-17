@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useCallback } from "react"
 import CardItem from "../CardItem/CardItem";
 import { GenreOptions, OriginOptions, CoverOptions } from "../../assets/data/data";
 import { CardWrapper, HeadWrapper, FilterWrapper } from "../Catalog/Catalog.styled";
@@ -6,34 +6,33 @@ import Filter from "./Select/Select";
 import { Button } from './Catalog.styled';
 import Item from './Item/Item';
 import api from "./../api/books";
+import { getBooks } from "../api/books_get";
 import Loader from "./../api/Loader.styled";
+import MainPicture from "../../assets/icons/books.png";
 
 
 const Catalog = () => {
 
     const [books, setBooks] = useState([]);
     const [loading, setLoading] = useState(false);
-    const fetchBooks = async (params = {}) => {
+
+    const fetchBooks = useCallback(async (params = {}) => {
         setLoading(true);
         try {
-            const response = await api.get('/', { params: params });
-            setBooks(response.data);
+            const data = await getBooks(params);
+            setBooks(data);
+            console.log("Дані, отримані з getBooks:", data);
         } catch (err) {
-            if (err.response) {
-                console.log(err.response.data);
-                console.log(err.response.status);
-                console.log(err.response.headers);
-            } else {
-                console.log(`Error: ${err.message}`);
-            }
+            console.log(`Error: ${err.message}`);
+            setBooks([]);
         } finally {
             setLoading(false);
         }
-    };
+    }, []);
 
     useEffect(() => {
         fetchBooks();
-    }, [])
+    }, [fetchBooks]);
 
 
     const [selectedBookID, setSelectedBookID] = useState(null);
@@ -95,7 +94,7 @@ const Catalog = () => {
                         title={title}
                         author={author}
                         text={text}
-                        imageSrc={image}
+                        imageSrc={MainPicture}
                         price={price}
                         onShowMore={() => setSelectedBookID(id)}
                     />

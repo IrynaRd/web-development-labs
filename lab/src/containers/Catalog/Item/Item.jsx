@@ -4,6 +4,7 @@ import { MainImage } from "../../Home/Home.styled";
 import { SectionWrapper, StyledText, FildsWrapper, AmountInput, FooterWrapper } from "./Item.styled";
 import Filter from "../Select/Select";
 import { CoverOptions } from "../../../assets/data/data";
+import MainPicture from "../../../assets/icons/books.png";
 
 function ItemPage ({ book, onGoBack }) {
     const [amount, setAmount] = useState(1);
@@ -12,7 +13,7 @@ function ItemPage ({ book, onGoBack }) {
     return (
         <div>
             <SectionWrapper>
-                <MainImage src={book.image} alt="Books" />
+                <MainImage src={MainPicture} alt="Books" />
                 <StyledText>
                     <h1>{book.title}</h1>
                     <p>Author: {book.author}</p>

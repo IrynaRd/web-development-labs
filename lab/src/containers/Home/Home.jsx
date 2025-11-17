@@ -35,7 +35,7 @@ const Home = () => {
                             title={title}
                             author = {author}
                             text={text}
-                            imageSrc={image}
+                            imageSrc={MainPicture}
                             price={price}
                             
                         />
