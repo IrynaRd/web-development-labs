@@ -21,7 +21,7 @@ const Catalog = () => {
         try {
             const data = await getBooks(params);
             setBooks(data);
-            console.log("Дані, отримані з getBooks:", data);
+            console.log(data);
         } catch (err) {
             console.log(`Error: ${err.message}`);
             setBooks([]);
