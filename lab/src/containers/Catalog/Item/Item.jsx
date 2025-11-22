@@ -1,14 +1,32 @@
-import React, {useState} from "react"
+import React, {useState} from "react";
+import {useDispatch} from 'react-redux';
 import {Button} from "../Catalog.styled";
 import { MainImage } from "../../Home/Home.styled";
 import { SectionWrapper, StyledText, FildsWrapper, AmountInput, FooterWrapper } from "./Item.styled";
 import Filter from "../Select/Select";
 import { CoverOptions } from "../../../assets/data/data";
 import MainPicture from "../../../assets/icons/books.png";
+import { addItemToCart } from "../../../states/cartList/cartList";
 
 function ItemPage ({ book, onGoBack }) {
     const [amount, setAmount] = useState(1);
     const totalPrice = book.price * (parseInt(amount, 10)|| 1);
+    const [selectedCover, setSelectedCover] = useState(null);
+    const dispatch = useDispatch();
+    const addToCart  = () => {
+        const amountCart = parseInt(amount, 10)|| 1;
+        const addedItem = {
+            book: {
+                id: book.id,
+                title: book.title,
+                price: book.price,
+                cover: selectedCover
+            },
+            amount: amountCart
+        }
+        dispatch(addItemToCart(addedItem));
+        console.log("Item added");
+    }
 
     return (
         <div>
@@ -30,7 +48,7 @@ function ItemPage ({ book, onGoBack }) {
                     <h2>Price: {totalPrice}$</h2>
                     <FildsWrapper>
                         <Button onClick={onGoBack}>Go back</Button>
-                        <Button>Add to cart</Button>
+                        <Button onClick={addToCart}>Add to cart</Button>
                     </FildsWrapper>
                 </FooterWrapper>
             </SectionWrapper>

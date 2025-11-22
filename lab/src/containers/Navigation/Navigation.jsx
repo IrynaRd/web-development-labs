@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-do
 import { LinkingWrapper } from './Navigation.styled';
 import Home from '../Home/Home';
 import Catalog from "../Catalog/Catalog";
+import Cart from "../Cart/Cart";
 
 const Navigation = () => (
     <Router>
@@ -22,7 +23,7 @@ const Navigation = () => (
 
             <Routes>
                 <Route path="/catalog" element={<Catalog />} />
-                <Route path="/cart" element={<div>cart</div>} />
+                <Route path="/cart" element={<Cart />} />
                 <Route path="/" element={<Home />} />
                 <Route path="*" element={<div>Not found</div>} />
             </Routes>
