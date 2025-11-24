@@ -7,6 +7,7 @@ import Filter from "../Select/Select";
 import { CoverOptions } from "../../../assets/data/data";
 import MainPicture from "../../../assets/icons/books.png";
 import { addItemToCart } from "../../../states/cartList/cartList";
+import { decreaseAvailability } from "../../../states/available/availableSlice";
 
 function ItemPage ({ book, onGoBack }) {
     const [amount, setAmount] = useState(1);
@@ -26,8 +27,18 @@ function ItemPage ({ book, onGoBack }) {
         }
         dispatch(addItemToCart(addedItem));
         console.log("Item added");
-    }
 
+        if (amountCart > book.availability) {
+             alert("Нема в наявності");
+             return; 
+        }
+
+        dispatch(decreaseAvailability({ 
+            bookId: book.id, 
+            amountToDecrease: amountCart 
+        }));
+    }
+    console.log("available", book.availability);
     return (
         <div>
             <SectionWrapper>
@@ -38,6 +49,7 @@ function ItemPage ({ book, onGoBack }) {
                     <p>Description: {book.text}</p>
                     <p>Genre: {book.genre}</p>
                     <p>Origin: {book.origin}</p> 
+                    <p>available: {book.availability}</p>
                     <FildsWrapper>
                         <Filter placeholder = {"Book Cover"} options = {CoverOptions} onChange={value => setSelectedCover(value)}/>
                         <AmountInput type="number" placeholder="Amount" step="1.0" min="0" onChange={(e) => setAmount(e.target.value)}/>
