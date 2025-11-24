@@ -8,8 +8,13 @@ import { CoverOptions } from "../../../assets/data/data";
 import MainPicture from "../../../assets/icons/books.png";
 import { addItemToCart } from "../../../states/cartList/cartList";
 import { decreaseAvailability } from "../../../states/available/availableSlice";
+import {useNavigate} from 'react-router-dom';
 
-function ItemPage ({ book, onGoBack }) {
+function ItemPage ({ book }) {
+    const navigate = useNavigate();
+    const handleGoBack = () => {
+        navigate(-1);
+    }
     const [amount, setAmount] = useState(1);
     const totalPrice = book.price * (parseInt(amount, 10)|| 1);
     const [selectedCover, setSelectedCover] = useState(null);
@@ -59,7 +64,7 @@ function ItemPage ({ book, onGoBack }) {
                 <FooterWrapper>
                     <h2>Price: {totalPrice}$</h2>
                     <FildsWrapper>
-                        <Button onClick={onGoBack}>Go back</Button>
+                        <Button onClick={handleGoBack}>Go back</Button>
                         <Button onClick={addToCart}>Add to cart</Button>
                     </FildsWrapper>
                 </FooterWrapper>

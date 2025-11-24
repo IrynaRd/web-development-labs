@@ -5,6 +5,8 @@ import { CartItemImage, CartItemWrapper, QuantityButton, QuantityControl } from 
 import { updateAmount, removeItem } from "../../../states/cartList/cartList";
 import { decreaseAvailability, increaseAvailability } from "../../../states/available/availableSlice";
 import { useSelector } from "react-redux";
+import { Button } from "../../Catalog/Catalog.styled";
+
 function CartItem ({item}) {
     const { book, amount } = item;
     const dispatch = useDispatch();
@@ -56,34 +58,14 @@ function CartItem ({item}) {
                     <h2>{book.title}</h2>
                     <p>{book.cover}</p>
                 </div>
-
-                
                 <QuantityControl>
-                    <QuantityButton 
-                        onClick={() => handleAmountChange(-1)} 
-                        disabled={amount <= 1}
-                    >
-                        -
-                    </QuantityButton>
+                    <QuantityButton onClick={() => handleAmountChange(-1)} disabled={amount <= 1}>-</QuantityButton>
                     <span>{amount}</span>
-                    <QuantityButton 
-                        onClick={() => handleAmountChange(1)}
-                        disabled={liveAvailability <= 0}
-                    >
-                        +
-                    </QuantityButton>
+                    <QuantityButton onClick={() => handleAmountChange(1)}disabled={liveAvailability <= 0}>+</QuantityButton>
                 </QuantityControl>
                 
-                
                 <h2>{book.price * amount}$</h2>
-                
-                
-                <p 
-                    onClick={handleRemoveItem} 
-                    style={{ cursor: 'pointer', color: 'red' }}
-                >
-                    remove
-                </p>
+                <Button onClick={handleRemoveItem} style={{ cursor: 'pointer', color: '#1e344d' }}>remove</Button>
             </CartItemWrapper>
         </div>
     )

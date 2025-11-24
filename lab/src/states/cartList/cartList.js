@@ -18,7 +18,6 @@ const cartSlice = createSlice({
             } else {
                 state.items.push({book, amount});
             }
-
         },
         updateAmount: (state, action) => {
             const id = action.payload.id;

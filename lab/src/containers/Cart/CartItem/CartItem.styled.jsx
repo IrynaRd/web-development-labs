@@ -1,4 +1,3 @@
-import React, {useState} from "react";
 import styled from 'styled-components';
 export const CartItemImage = styled.img`
     width: 150px;
@@ -9,15 +8,20 @@ export const CartItemImage = styled.img`
 
 export const CartItemWrapper = styled.div`
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     border-width: 1px;
     border-color: #1e344d;
+    width: 1000px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 7px;
+    margin: 10px;
 `;
 
 export const QuantityControl = styled.div`
   display: flex;
   align-items: center;
-  border: 1px solid #ccc;
-  border-radius: 4px;
   overflow: hidden;
   
   span {
@@ -44,3 +48,4 @@ export const QuantityButton = styled.button`
     color: #ccc;
   }
 `;
+

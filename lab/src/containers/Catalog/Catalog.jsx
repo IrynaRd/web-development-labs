@@ -10,13 +10,24 @@ import { getBooks } from "../api/books_get";
 import Loader from "./../api/Loader.styled";
 import MainPicture from "../../assets/icons/books.png";
 
-import { setInventory, setInventoryLoading, decreaseAvailability } from "../../states/available/availableSlice";
+import { useParams, useNavigate } from 'react-router-dom';
+import { setInventory, setInventoryLoading } from "../../states/available/availableSlice";
 import { useSelector, useDispatch } from 'react-redux';
 
+
+function ItemWrapper() {
+    const { bookId } = useParams();
+    const navigate = useNavigate();
+    const books = useSelector((state) => state.inventory.books);
+    const selectedBook = books.find(book => book.id.toString() === bookId);
+
+    return <Item book={selectedBook} />;
+}
 const Catalog = () => {
     const books = useSelector((state) => state.inventory.books);
     const loading = useSelector((state) => state.inventory.loading);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     
     const fetchBooks = useCallback(async (params = {}) => {
         dispatch(setInventoryLoading(true));
@@ -31,17 +42,15 @@ const Catalog = () => {
         }
     }, [dispatch]);
 
-    // useEffect(() => {
-    //     if (books.length === 0 && !loading) { 
-    //     fetchBooks();}
-    // }, []);
+    const handleShowMore = (id) => {
+        navigate(`/catalog/${id}`); 
+    };
+
     useEffect(() => {
         if (books.length === 0 && !loading) {
             fetchBooks();
         }
     }, [books.length, loading, fetchBooks]);
-
-    const [selectedBookID, setSelectedBookID] = useState(null);
 
     const [search, setSearch] = useState("");
 
@@ -71,17 +80,6 @@ const Catalog = () => {
         fetchBooks(filters);
     };
 
-    
-    if (selectedBookID) {
-        const selectedBook = books.find(book => book.id === selectedBookID);
-        console.log("Catalog availability:", selectedBook?.availability);
-
-        if (!selectedBook) return <div>Book not found or loading...</div>;
-
-        return (
-            <Item book={selectedBook} onGoBack={() => setSelectedBookID(null)}></Item>
-        )
-    }
 
     return (
         <div>
@@ -107,7 +105,7 @@ const Catalog = () => {
                             text={text}
                             imageSrc={MainPicture}
                             price={price}
-                            onShowMore={() => setSelectedBookID(id)}
+                            onShowMore={() => handleShowMore(id)}
                         />
                     )
                     )}
@@ -117,4 +115,5 @@ const Catalog = () => {
     )
 }
 
+export { ItemWrapper };
 export default Catalog;

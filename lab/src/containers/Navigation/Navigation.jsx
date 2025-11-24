@@ -1,10 +1,10 @@
 import React from "react";
-
 import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-dom";
 import { LinkingWrapper } from './Navigation.styled';
 import Home from '../Home/Home';
 import Catalog from "../Catalog/Catalog";
 import Cart from "../Cart/Cart";
+import { ItemWrapper } from "../Catalog/Catalog";
 
 const Navigation = () => (
     <Router>
@@ -23,6 +23,7 @@ const Navigation = () => (
 
             <Routes>
                 <Route path="/catalog" element={<Catalog />} />
+                <Route path="/catalog/:bookId" element={<ItemWrapper />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/" element={<Home />} />
                 <Route path="*" element={<div>Not found</div>} />
