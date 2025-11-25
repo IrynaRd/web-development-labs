@@ -6,15 +6,19 @@ import { updateAmount, removeItem } from "../../../states/cartList/cartList";
 import { decreaseAvailability, increaseAvailability } from "../../../states/available/availableSlice";
 import { useSelector } from "react-redux";
 import { Button } from "../../Catalog/Catalog.styled";
+import { useNavigate } from "react-router-dom";
 
 function CartItem ({item}) {
     const { book, amount } = item;
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const itemIdPayload = { 
         id: book.id, 
         cover: book.cover 
     };
-
+    const handleToItem = () => {
+        navigate(`/catalog/${book.id}`); 
+    };
     const liveAvailability = useSelector(state => { 
         const inventoryBook = state.inventory.books.find(b => b.id === book.id);
         return inventoryBook ? Number(inventoryBook.availability) : 0; 
@@ -66,6 +70,7 @@ function CartItem ({item}) {
                 
                 <h2>{book.price * amount}$</h2>
                 <Button onClick={handleRemoveItem} style={{ cursor: 'pointer', color: '#1e344d' }}>remove</Button>
+                <Button onClick={handleToItem}>To Item</Button>
             </CartItemWrapper>
         </div>
     )

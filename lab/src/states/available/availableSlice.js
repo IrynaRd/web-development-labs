@@ -1,10 +1,36 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+const storage_key = 'inventory'; 
+const loadInventoryState = () => {
+    try {
+        const serializedState = localStorage.getItem(storage_key);
+        if (serializedState === null) {
+            return undefined;
+        }
+        return JSON.parse(serializedState); 
+    } catch (err) {
+        console.error(err);
+        return undefined;
+    }
+};
+
+ const saveInventoryState = (inventoryState) => {
+    try {
+        const serializedState = JSON.stringify(inventoryState);
+        localStorage.setItem(storage_key, serializedState);
+    } catch (err) {
+        console.error(err);
+    }
+};
+
+const persistedInventoryState = loadInventoryState();
+
+const initialState = persistedInventoryState ? persistedInventoryState : {
     books: [],
     loading: false,
     error: null,
 };
+
 
 const inventorySlice = createSlice({
     name: 'inventory',
@@ -18,7 +44,6 @@ const inventorySlice = createSlice({
         setInventoryLoading: (state, action) => {
             state.loading = action.payload;
         },
-        
         
         decreaseAvailability: (state, action) => {
             const { bookId, amountToDecrease } = action.payload;
@@ -45,4 +70,5 @@ const inventorySlice = createSlice({
 });
 
 export const { setInventory, setInventoryLoading, decreaseAvailability, increaseAvailability } = inventorySlice.actions;
+export { saveInventoryState }; 
 export default inventorySlice.reducer;
