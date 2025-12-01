@@ -2,14 +2,19 @@ import React, {useState} from "react"
 import {Button} from "../Catalog/Catalog.styled";
 import { BtsWrapper } from "./Cart.styled";
 import CartItem from "./CartItem/CartItem";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
+
 const Cart = () => {
     const cartItems = useSelector((state) => state.cart.items);
     const navigate = useNavigate();
-    const handleBackToCatalog = () => {
+    const handleBack = () => {
         navigate(-1);
     };
+
+    const handleCheckout = () => {
+        navigate(`/cart/checkout`);
+    }
 
     return (
         <>
@@ -19,8 +24,8 @@ const Cart = () => {
                 
             ) )}
             <BtsWrapper>
-                <Button onClick={handleBackToCatalog}>Go back</Button>
-                <Button>Continue</Button>
+                <Button onClick={handleBack}>Go back</Button>
+                <Button onClick={handleCheckout}>Continue</Button>
             </BtsWrapper>
         </>
     )

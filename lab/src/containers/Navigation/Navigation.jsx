@@ -5,6 +5,8 @@ import Home from '../Home/Home';
 import Catalog from "../Catalog/Catalog";
 import Cart from "../Cart/Cart";
 import { ItemWrapper } from "../Catalog/Catalog";
+import Checkout from "../Cart/Checkout/Checkout";
+import { Success } from "../Cart/Checkout/Checkout";
 
 const Navigation = () => (
     <Router>
@@ -25,6 +27,8 @@ const Navigation = () => (
                 <Route path="/catalog" element={<Catalog />} />
                 <Route path="/catalog/:bookId" element={<ItemWrapper />} />
                 <Route path="/cart" element={<Cart />} />
+                <Route path="/cart/checkout" element={<Checkout />}/>
+                <Route path="/cart/checkout/success" element={<Success />}/>
                 <Route path="/" element={<Home />} />
                 <Route path="*" element={<div>Not found</div>} />
             </Routes>

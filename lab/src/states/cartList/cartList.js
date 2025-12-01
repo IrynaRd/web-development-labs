@@ -78,9 +78,13 @@ const cartSlice = createSlice({
             state.items = state.items.filter(item => !(item.book.id === id && item.book.cover === cover));
             console.log("deleted");
             console.log(state.items);
+        },
+
+        clearList: (state) => {
+            state.items = [];
         }
     }
 });
 
-export const {addItemToCart, updateAmount, removeItem} = cartSlice.actions;
+export const {addItemToCart, updateAmount, removeItem, clearList} = cartSlice.actions;
 export default cartSlice.reducer;
