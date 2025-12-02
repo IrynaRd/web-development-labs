@@ -53,14 +53,12 @@ const Checkout = () => {
             .min(3, "Should more than 3 characters")
             .required("First name is required"),
         last_name: Yup.string()
-            .min(3, "Should more than 15 characters")
+            .min(3, "Should more than 3 characters")
             .required("Last name is required"),
         email: Yup.string()
-            .email("Incorrect email format")
+            .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, "Incorrect email format")
             .required("Email is required"),
-
-        phone: Yup.number()    
-            .integer("Only integers")
+        phone: Yup.number()
             .required("Phone is required"),
         address: Yup.string()
             .matches(/вул/gi, "add street to address")
@@ -72,15 +70,13 @@ const Checkout = () => {
         localStorage.setItem('checkoutData', JSON.stringify(values));
 
         setTimeout(() => {
-            console.log("Success submit:", values);
+            console.log("submit: ", values);
             setSubmitting(false);
             navigate(`/cart/checkout/success`);
             dispatch(clearList());
         }, 5);
 
     };
-
-    const cartItems = useSelector((state) => state.cart.items);
 
     const handleFulfill = (setValues) => {
         const storedData = localStorage.getItem('checkoutData');
@@ -110,8 +106,7 @@ const Checkout = () => {
                 >
                     {({ isValid, isSubmitting, setValues }) => (
                         <Form>
-                            <InputWrapper>
-                            
+                            <InputWrapper>                            
                                 <div className="field">
                                     <StyledField name="first_name" placeholder="First name" />
 
@@ -152,10 +147,11 @@ const Checkout = () => {
 
                             <ButtonsWrapper>
                                 <Button type="submit" disabled={!isValid || isSubmitting}>
-                                        {isSubmitting ? 'error' : 'Continue'}
+                                        {isSubmitting ? 'inprocess' : 'Continue'}
                                 </Button>
 
                                 <Button onClick={handleGoBack} >Go back</Button>
+                                <Button type="button" onClick={()=>handleFulfill(setValues)}>Fulfill</Button>
                             </ButtonsWrapper>
                         </Form>
                     )
