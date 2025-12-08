@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../../../Catalog/Catalog.styled";
 import { useSelector, useDispatch } from "react-redux";
 import { useAuth } from "../../AuthProvider/AuthProvider";
-import { FormWrapper, InputWrapper, StyledField, ButtonsWrapper, SuccessWrapper } from "../../../Cart/Checkout/Checkout.styled";
+import { FormWrapper, StyledField } from "../../../Cart/Checkout/Checkout.styled";
 import { ButtonWrapper, ButtonFooter } from "../LogIn/LogIn.styled";
 
 
@@ -43,7 +43,7 @@ const SignUp = () => {
 
     const onSubmit = (values, { setSubmitting }) => {
         setSubmitting(true);
-        
+        localStorage.setItem('signUpData', JSON.stringify(values));
 
         setTimeout(() => {
             console.log("signUp: ", values.email);
@@ -53,6 +53,22 @@ const SignUp = () => {
             setSubmitting(false);
         }, 5);
 
+    };
+
+    const handleFulfill = (setValues) => {
+        const storedData = localStorage.getItem('signUpData');
+        
+        if (storedData) {
+            try {
+                const parsedData = JSON.parse(storedData);
+                setValues(parsedData);
+            } catch (error) {
+                console.error("Error parsing stored data:", error);
+                localStorage.removeItem('signUpData');
+            }
+        } else {
+            alert("nothing saved to signUpData");
+        }
     };
 
     const handleLogIn = () => {
@@ -106,7 +122,7 @@ const SignUp = () => {
                             <ButtonFooter type="submit" disabled={!isValid || isSubmitting}>
                                 {isSubmitting ? 'inprocess' : 'Sign me up'}
                             </ButtonFooter>
-
+                            <Button type="button" onClick={()=>handleFulfill(setValues)}>Fulfill</Button>
                         </Form>
                     )
 

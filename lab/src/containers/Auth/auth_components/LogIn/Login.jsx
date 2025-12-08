@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../../../Catalog/Catalog.styled";
 import { useSelector, useDispatch } from "react-redux";
 import { useAuth } from "../../AuthProvider/AuthProvider";
-import { FormWrapper, InputWrapper, StyledField, ButtonsWrapper, SuccessWrapper } from "../../../Cart/Checkout/Checkout.styled";
+import { FormWrapper, StyledField } from "../../../Cart/Checkout/Checkout.styled";
 import { ButtonWrapper, ButtonFooter } from "./LogIn.styled";
 
 const ErrorDisplay = ({children}) => {
@@ -34,6 +34,7 @@ const LogIn = () => {
 
     const onSubmit = (values, { setSubmitting }) => {
         setSubmitting(true);
+        localStorage.setItem('logInData', JSON.stringify(values));
 
         setTimeout(() => {
             console.log("login: ", values.email);
@@ -43,6 +44,22 @@ const LogIn = () => {
             setSubmitting(false);
         }, 5);
 
+    };
+
+    const handleFulfill = (setValues) => {
+        const storedData = localStorage.getItem('logInData');
+        
+        if (storedData) {
+            try {
+                const parsedData = JSON.parse(storedData);
+                setValues(parsedData);
+            } catch (error) {
+                console.error("Error parsing stored data:", error);
+                localStorage.removeItem('logInData');
+            }
+        } else {
+            alert("nothing saved to logInData");
+        }
     };
 
     const handleSignUp = () => {
@@ -76,14 +93,16 @@ const LogIn = () => {
 
 
                             <ButtonWrapper>
-
                                 <p>Not a member?</p>
                                 <Button type = "button" onClick={handleSignUp} >Sign up</Button>
                             </ButtonWrapper>
                             
-                            <ButtonFooter type="submit" disabled={!isValid || isSubmitting}>
-                                {isSubmitting ? 'inprocess' : 'Log in'}
-                            </ButtonFooter>
+                            <ButtonWrapper>
+                                <ButtonFooter type="submit" disabled={!isValid || isSubmitting}>
+                                    {isSubmitting ? 'inprocess' : 'Log in'}
+                                </ButtonFooter>
+                                <Button type="button" onClick={()=>handleFulfill(setValues)}>  Fulfill  </Button>
+                            </ButtonWrapper>
 
                         </Form>
                     )
