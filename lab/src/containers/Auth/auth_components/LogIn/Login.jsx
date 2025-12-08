@@ -6,7 +6,7 @@ import { Button } from "../../../Catalog/Catalog.styled";
 import { useSelector, useDispatch } from "react-redux";
 import { useAuth } from "../../AuthProvider/AuthProvider";
 import { FormWrapper, InputWrapper, StyledField, ButtonsWrapper, SuccessWrapper } from "../../../Cart/Checkout/Checkout.styled";
-
+import { ButtonWrapper, ButtonFooter } from "./LogIn.styled";
 
 const ErrorDisplay = ({children}) => {
     return (
@@ -45,6 +45,10 @@ const LogIn = () => {
 
     };
 
+    const handleSignUp = () => {
+        navigate('/signup')
+    }
+
 
     return (
         <div>
@@ -71,13 +75,15 @@ const LogIn = () => {
                             </div>
 
 
-                            <div>
+                            <ButtonWrapper>
+
                                 <p>Not a member?</p>
-                                {/* <Button onClick={} >Sign in</Button> */}
-                            </div>
-                            <Button type="submit" disabled={!isValid || isSubmitting}>
-                                {isSubmitting ? 'inprocess' : 'Log in me '}
-                            </Button>
+                                <Button type = "button" onClick={handleSignUp} >Sign up</Button>
+                            </ButtonWrapper>
+                            
+                            <ButtonFooter type="submit" disabled={!isValid || isSubmitting}>
+                                {isSubmitting ? 'inprocess' : 'Log in'}
+                            </ButtonFooter>
 
                         </Form>
                     )

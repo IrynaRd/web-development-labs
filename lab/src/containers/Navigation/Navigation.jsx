@@ -12,6 +12,7 @@ import SignUp from "../Auth/auth_components/SignUp/SignUp";
 import { useAuth } from "../Auth/AuthProvider/AuthProvider";
 import ProtectedRoute from "../Auth/AuthProvider/ProtectedRoute";
 import PublicRoute from "../Auth/AuthProvider/PublicRoute";
+import { Button } from "../Catalog/Catalog.styled";
 
 
 const Navigation = () => {
@@ -31,17 +32,17 @@ const Navigation = () => {
                             <li>
                                 <NavLink to="/cart" end className={({ isActive }) => isActive ? 'selected' : undefined}>Cart</NavLink>
                             </li>
-                            <button onClick={() => logOut()}>Sign out</button>
+                            <Button onClick={() => logOut()}>Sign out</Button>
                         </>}
 
                     {!isAuthenticated && (
                         <>
-                            <li>
+                            {/* <li>
                                 <NavLink to="/login" end className={({ isActive }) => isActive ? 'selected' : undefined}>Login</NavLink>
                             </li>
                             <li>
                                 <NavLink to="/signup" end className={({ isActive }) => isActive ? 'selected' : undefined}>Sign Up</NavLink>
-                            </li>
+                            </li> */}
                         </>
                     )}
                 </ul>

@@ -1,24 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
-const storage_key = 'cart';
+const storage_key = 'userCart';
 const doba = 24 * 3600 * 1000;
 
 const loadState = () => {
     try {
         const serializedState = localStorage.getItem(storage_key);
         if (serializedState === null) {
-            return undefined;
+            return {userCarts: {}};
         }
         const savedData = JSON.parse(serializedState);
         
         if (savedData.timestamp && (Date.now() - savedData.timestamp > doba)) {
             localStorage.removeItem(storage_key);
-            return undefined;
+            return {userCarts: {}};
         }
 
         return savedData.cart;
     } catch (err) {
         console.error(err);
-        return undefined;
+        return {userCarts: {}};
     }
 };
 
@@ -37,8 +37,9 @@ export const saveState = (cartState) => {
 
 const persistedState = loadState();
 
-const initialState = persistedState ? persistedState : {
-    items: []
+const initialState =  {
+    ...persistedState,
+    userCarts: persistedState.userCarts || {}
 };
 
 const cartSlice = createSlice({
@@ -46,42 +47,51 @@ const cartSlice = createSlice({
     initialState,
     reducers: {
         addItemToCart: (state, action) => {
-            const book = action.payload.book;
-            const amount = action.payload.amount;
-            const exists = state.items.find(item => item.book.id===book.id && item.book.cover === book.cover);
+            const { book, amount, email } = action.payload;
+            
+            if (!state.userCarts[email]) {
+                state.userCarts[email] = [];
+            }
+            const currentItems = state.userCarts[email];
+            const exists = currentItems.find(item => item.book.id===book.id && item.book.cover === book.cover);
 
             if (exists) {
                 exists.amount += amount;
             } else {
-                state.items.push({book, amount});
+                currentItems.push({book, amount});
             }
         },
         updateAmount: (state, action) => {
-            const id = action.payload.id;
-            const cover = action.payload.cover;
-            const amountChange = action.payload.amountChange;
-            const exists = state.items.find(item => item.book.id===id && item.book.cover === cover);
-
+            const { id, cover, amountChange, email } = action.payload;
+           
+            if (!state.userCarts[email]) {
+                return;
+            }
+            const currentItems = state.userCarts[email];
+            const exists = currentItems.find(item => item.book.id===id && item.book.cover === cover);
             if (exists) {
                 exists.amount += amountChange;
-                if(exists.amount < 1) {
-                    state.items = state.items.filter(
-                        item => !(item.book.id === id && item.book.cover === cover)
-                    );
+                if (exists.amount < 1) {
+                    state.userCarts[email] = currentItems.filter(
+                        item => !(item.book.id === id && item.book.cover === cover));
                 }
             }
         },
 
         removeItem: (state, action) => {
-            const id = action.payload.id;
-            const cover = action.payload.cover;
-            state.items = state.items.filter(item => !(item.book.id === id && item.book.cover === cover));
+            const { id, cover, email } = action.payload;
+            if (!state.userCarts[email]) return;
+            const currentItems = state.userCarts[email];
+
+            state.userCarts[email] = currentItems.filter(item => !(item.book.id === id && item.book.cover === cover));
             console.log("deleted");
-            console.log(state.items);
         },
 
-        clearList: (state) => {
-            state.items = [];
+        clearList: (state, action) => {
+            const { email } = action.payload;
+             if (state.userCarts[email]) {
+                 state.userCarts[email] = [];
+             }
         }
     }
 });

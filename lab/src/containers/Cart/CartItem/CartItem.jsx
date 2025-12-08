@@ -7,14 +7,17 @@ import { decreaseAvailability, increaseAvailability } from "../../../states/avai
 import { useSelector } from "react-redux";
 import { Button } from "../../Catalog/Catalog.styled";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../Auth/AuthProvider/AuthProvider";
 
 function CartItem ({item}) {
+    const {email} = useAuth();
     const { book, amount } = item;
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const itemIdPayload = { 
         id: book.id, 
-        cover: book.cover 
+        cover: book.cover,
+        email: email 
     };
     const handleToItem = () => {
         navigate(`/catalog/${book.id}`); 

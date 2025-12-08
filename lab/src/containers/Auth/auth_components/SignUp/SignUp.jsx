@@ -6,6 +6,7 @@ import { Button } from "../../../Catalog/Catalog.styled";
 import { useSelector, useDispatch } from "react-redux";
 import { useAuth } from "../../AuthProvider/AuthProvider";
 import { FormWrapper, InputWrapper, StyledField, ButtonsWrapper, SuccessWrapper } from "../../../Cart/Checkout/Checkout.styled";
+import { ButtonWrapper, ButtonFooter } from "../LogIn/LogIn.styled";
 
 
 const ErrorDisplay = ({children}) => {
@@ -36,6 +37,7 @@ const SignUp = () => {
         password: Yup.string()
             .required("Password is required"),
         retype_password: Yup.string()
+            .oneOf([Yup.ref('password'), null], "Password should be the same")
             .required("Password retype is required"),
     });
 
@@ -52,6 +54,10 @@ const SignUp = () => {
         }, 5);
 
     };
+
+    const handleLogIn = () => {
+        navigate('/login')
+    }
 
 
     return (
@@ -93,13 +99,13 @@ const SignUp = () => {
                                 </div>
                             </div>
 
-                            <div>
+                            <ButtonWrapper>
                                 <p>Already a member?</p>
-                                {/* <Button onClick={} >Sign in</Button> */}
-                            </div>
-                            <Button type="submit" disabled={!isValid || isSubmitting}>
+                                <Button type = "button" onClick={handleLogIn} >Sign in</Button>
+                            </ButtonWrapper>
+                            <ButtonFooter type="submit" disabled={!isValid || isSubmitting}>
                                 {isSubmitting ? 'inprocess' : 'Sign me up'}
-                            </Button>
+                            </ButtonFooter>
 
                         </Form>
                     )

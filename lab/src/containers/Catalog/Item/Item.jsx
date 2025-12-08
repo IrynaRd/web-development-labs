@@ -9,8 +9,10 @@ import MainPicture from "../../../assets/icons/books.png";
 import { addItemToCart } from "../../../states/cartList/cartList";
 import { decreaseAvailability } from "../../../states/available/availableSlice";
 import {useNavigate} from 'react-router-dom';
+import { useAuth } from "../../Auth/AuthProvider/AuthProvider";
 
 function ItemPage ({ book }) {
+    const {email} = useAuth();
     const navigate = useNavigate();
     const handleGoBack = () => {
         navigate(-1);
@@ -28,7 +30,8 @@ function ItemPage ({ book }) {
                 price: book.price,
                 cover: selectedCover
             },
-            amount: amountCart
+            amount: amountCart, 
+            email: email
         }
         dispatch(addItemToCart(addedItem));
         console.log("Item added");

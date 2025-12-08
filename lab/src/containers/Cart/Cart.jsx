@@ -4,9 +4,16 @@ import { BtsWrapper } from "./Cart.styled";
 import CartItem from "./CartItem/CartItem";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from "../Auth/AuthProvider/AuthProvider";
 
 const Cart = () => {
-    const cartItems = useSelector((state) => state.cart.items);
+    const {email} = useAuth();
+    const cartItems = useSelector((state) =>{
+        if (email) {
+            return state.cart.userCarts[email] || [];
+        }
+        return [];
+    });
     const navigate = useNavigate();
     const handleBack = () => {
         navigate(-1);
