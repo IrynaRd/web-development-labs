@@ -7,6 +7,7 @@ import {Button} from "../../Catalog/Catalog.styled";
 import { FormWrapper, InputWrapper, StyledField, ButtonsWrapper, SuccessWrapper } from "./Checkout.styled";
 import { useSelector, useDispatch } from "react-redux";
 import { clearList } from "../../../states/cartList/cartList";
+import { useAuth } from "../../Auth/AuthProvider/AuthProvider";
 
 const ErrorDisplay = ({children}) => {
     return (
@@ -32,6 +33,7 @@ const Success = () => {
 }
 
 const Checkout = () => {
+    const {email} = useAuth();
     const navigate = useNavigate();
     const handleGoBack = () => {
         navigate(-1);
@@ -73,7 +75,7 @@ const Checkout = () => {
             console.log("submit: ", values);
             setSubmitting(false);
             navigate(`/cart/checkout/success`);
-            dispatch(clearList());
+            dispatch(clearList({email}));
         }, 5);
 
     };
